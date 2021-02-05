@@ -1,0 +1,13 @@
+﻿<Properties StartupItem="GameJam2\GameJam2.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="GameJam2\Program.cs">
+    <Files>
+      <File FileName="GameJam2\Program.cs" Line="6" Column="3" />
+      <File FileName="GameJam2\TraitementConsole.cs" Line="53" Column="4" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

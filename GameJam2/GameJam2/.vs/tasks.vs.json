@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "tâche-GameJam2",
+      "appliesTo": "GameJam2.csproj",
+      "type": "msbuild"
+    }
+  ]
+}
