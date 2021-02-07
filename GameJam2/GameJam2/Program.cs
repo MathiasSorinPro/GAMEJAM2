@@ -20,6 +20,7 @@ namespace GameJam2
             //get random event from list
             Random rnd = new Random();
             int rand = rnd.Next(0, 3);
+            Console.WriteLine(rand);
             currentEvent = new Events(String.Format("{0}",rand));
             return currentEvent;
         }
@@ -42,11 +43,11 @@ namespace GameJam2
                 if (currentEvent.ImpactNoMood > 0) { up3 = "▲"; } else if (currentEvent.ImpactNoMood < 0) { down3 = "▼"; }
             }
             TraitementConsole.ChangeCouleur(ConsoleColor.Black, ConsoleColor.Green, false);
-            Console.WriteLine("        {0}           {1}          {2}", up1, up2, up3);
+            Console.WriteLine("                                                                          {0}           {1}          {2}", up1, up2, up3);
             Console.ResetColor();
             Console.WriteLine("");
             TraitementConsole.ChangeCouleur(ConsoleColor.Black, ConsoleColor.Red, false);
-            Console.WriteLine("        {0}           {1}          {2}", down1, down2, down3);
+            Console.WriteLine("                                                                          {0}           {1}          {2}", down1, down2, down3);
             Console.ResetColor();
         }
 
@@ -54,17 +55,22 @@ namespace GameJam2
         public static void DisplayGame(Events currentEvent)
         {
             TraitementConsole.NettoieConsole();
+            Console.WriteLine("");
+            Console.WriteLine("                                                                      {0}", currentEvent.Text);
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("");
             //Art contien yes no et le dessin au millieu
             TraitementConsole.AfficheAsciiArtFile(currentEvent.Art);
 
             //Texte de contexte explication
-            Console.WriteLine(currentEvent.Text);
+            //Console.WriteLine(currentEvent.Text);
 
-            Console.WriteLine("");
+            //Console.WriteLine("");
 
             //Ca c'est les stats 
             TraitementConsole.ChangeCouleur(ConsoleColor.Black, ConsoleColor.White, false);
-            Console.WriteLine("Argent: {0}  Eleves: {1}  Moral: {2}", money, students, mood);
+            Console.WriteLine("                                                                  Argent: {0}  Eleves: {1}  Moral: {2}", money, students, mood);
         }
 
         //Appliquer les cartes/events
@@ -110,7 +116,7 @@ namespace GameJam2
             while (true)
             {
                 if (!(NativeMethods.ReadConsoleInput(handle, ref record, 1, ref recordLen))) { throw new Win32Exception(); }
-                Console.SetCursorPosition(0, 46);
+                Console.SetCursorPosition(0, 18);
                 // DEBUG TO SHOW MOUSE POS AND MOUSE STATE
                 /*switch (record.EventType) {
                     case NativeMethods.MOUSE_EVENT: {
@@ -137,7 +143,7 @@ namespace GameJam2
                 int X = record.MouseEvent.dwMousePosition.X;
                 int Y = record.MouseEvent.dwMousePosition.Y;
                 //Yes boutton
-                if(X > 10 && X < 60 && Y > 2 && Y < 40)
+                if(X > 0 && X < 71 && Y > 4 && Y < 16)
                 {
                     ColoredArrowsDisplay(currentEvent, true);
                     if (temp == 1)
@@ -147,7 +153,7 @@ namespace GameJam2
                         DisplayGame(currentEvent);
                     }
                 }
-                if (X > 130 && X < 190 && Y > 2 && Y < 40)
+                if (X > 93 && X < 165 && Y > 4 && Y < 16)
                 {
                     ColoredArrowsDisplay(currentEvent, false);
                     if (temp == 1)
