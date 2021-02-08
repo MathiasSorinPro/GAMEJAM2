@@ -9,6 +9,7 @@ namespace GameJam2
 	class MainClass
 	{
         //Jauges de Gestion
+        static int week = 0;
         static int money = 50;
         static int students = 50;
         static int mood = 50;
@@ -54,19 +55,18 @@ namespace GameJam2
         //Afficher UI et infos
         public static void DisplayGame(Events currentEvent)
         {
-            TraitementConsole.NettoieConsole();
+            Console.Clear();
+            TraitementConsole.ChangeCouleur(ConsoleColor.DarkBlue, ConsoleColor.White, false);
+            // FIX ISSUE WHERE IF WEEK >= 10 WILL GO TO LINE BELOW
+            Console.WriteLine("                                                                                Week: {0}                                                                                ", week);
+            Console.ResetColor();
             Console.WriteLine("");
-            Console.WriteLine("                                                                      {0}", currentEvent.Text);
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (currentEvent.Text.Length / 2)) + "}", currentEvent.Text));
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("");
             //Art contien yes no et le dessin au millieu
             TraitementConsole.AfficheAsciiArtFile(currentEvent.Art);
-
-            //Texte de contexte explication
-            //Console.WriteLine(currentEvent.Text);
-
-            //Console.WriteLine("");
 
             //Ca c'est les stats 
             TraitementConsole.ChangeCouleur(ConsoleColor.Black, ConsoleColor.White, false);
@@ -77,6 +77,7 @@ namespace GameJam2
         public static void ApplyEvent(Events currentEvent, bool yes)
         {
             //blabalalalala
+            week++;
             if (yes)
             {
                 money += currentEvent.ImpactYesMoney;
@@ -93,11 +94,13 @@ namespace GameJam2
 
 		public static void Main (string[] args)
 		{
+            //Change title make cursor invis
+            Console.Title = "Le jeu video";
+            Console.CursorVisible = false;
+
             Events currentEvent;
 
 			//TraitementConsole.ChangeCouleur(ConsoleColor.DarkBlue, ConsoleColor.White, true);
-
-
             var handle = NativeMethods.GetStdHandle(NativeMethods.STD_INPUT_HANDLE);
 
             int mode = 0;
@@ -116,7 +119,7 @@ namespace GameJam2
             while (true)
             {
                 if (!(NativeMethods.ReadConsoleInput(handle, ref record, 1, ref recordLen))) { throw new Win32Exception(); }
-                Console.SetCursorPosition(0, 18);
+                Console.SetCursorPosition(0, 20);
                 // DEBUG TO SHOW MOUSE POS AND MOUSE STATE
                 /*switch (record.EventType) {
                     case NativeMethods.MOUSE_EVENT: {
