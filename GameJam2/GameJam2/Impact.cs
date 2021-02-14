@@ -19,9 +19,6 @@ namespace GameJam2
         {
             string tempStr = String.Concat(TraitementConsole.LireFichier("card" + id + "impact" + type + ".txt"));
             int[] intArray = tempStr.Split(',').Select(int.Parse).ToArray();
-            /*int tempInt = intArray[0];
-            intArray[0] = intArray[intArray.Length-1];
-            intArray[intArray.Length - 1] = tempInt;*/
             return intArray;
         }
 

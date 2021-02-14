@@ -174,7 +174,7 @@ namespace GameJam2
 		public static string[] LireFichier(string fichier){
 			
 			string path = "..\\..\\Fichiers\\Textes\\" +fichier;
-			Console.WriteLine(path);
+			//Console.WriteLine(path);
 			List<string> lignes = new List<string>();
 			using (StreamReader reader = new StreamReader(path)){
 				string ligne;

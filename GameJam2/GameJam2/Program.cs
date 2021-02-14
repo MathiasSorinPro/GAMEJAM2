@@ -8,11 +8,43 @@ namespace GameJam2
 {
 	class MainClass
 	{
+        //Game vars
+        static int week = 1;
+        static bool gameover = false;
         //Jauges de Gestion
-        static int week = 0;
         static int money = 50;
         static int students = 50;
         static int mood = 50;
+        static int teacher = 50;
+
+        //Game Over display func
+        public static void GameOver()
+        {
+            string gameovertext = "";
+
+            Console.Clear();
+
+            //check wich text to display
+            if(money == 0) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover0.txt"));}
+            else if(money == 100) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover1.txt"));}
+            else if(students == 0) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover2.txt"));}
+            else if(students == 100) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover3.txt"));}
+            else if(mood == 0) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover4.txt"));}
+            else if(mood == 100) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover5.txt"));}
+            else if(teacher == 0) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover6.txt"));}
+            else if(teacher == 100) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover7.txt"));}
+
+            TraitementConsole.ChangeCouleur(ConsoleColor.DarkBlue, ConsoleColor.White, false);
+            Console.WriteLine("                                                                            Semaine: {0}/48                                                                            ", week-1);
+            Console.ResetColor();
+            Console.WriteLine("                                                                            Game Over");
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (gameovertext.Length / 2)) + "}", gameovertext));
+            //Art contien yes no et le dessin au millieu
+            //TraitementConsole.AfficheAsciiArtFile(currentEvent.Art);
+            //Ca c'est les stats 
+            TraitementConsole.ChangeCouleur(ConsoleColor.Black, ConsoleColor.White, false);
+            Console.WriteLine("                                                  Finances: {0}  Bonheur élèves: {1}  Santé mentale: {2}  Bonheur prof: {3}", money, students, mood, teacher);
+        }
 
         //Get random event
         public static Events GetRandomEvent()
@@ -20,7 +52,7 @@ namespace GameJam2
             Events currentEvent;
             //get random event from list
             Random rnd = new Random();
-            int rand = rnd.Next(0, 3);
+            int rand = rnd.Next(1, 49);
             Console.WriteLine(rand);
             currentEvent = new Events(String.Format("{0}",rand));
             return currentEvent;
@@ -30,25 +62,27 @@ namespace GameJam2
         public static void ColoredArrowsDisplay(Events currentEvent, bool yes)
         {
             //▲▼
-            string up1 = " ", up2 = " ", up3 = " ", down1 = " ", down2 = " ", down3 = " ";
+            string up1 = " ", up2 = " ", up3 = " ", up4 = " ", down1 = " ", down2 = " ", down3 = " ", down4 = " ";
             if(yes)
             {
                 if (currentEvent.ImpactYesMoney > 0) { up1 = "▲"; } else if (currentEvent.ImpactYesMoney < 0) { down1 = "▼"; }
                 if (currentEvent.ImpactYesStudents > 10) { up2 = "▲"; } else if (currentEvent.ImpactYesStudents < 0) { down2 = "▼"; }
                 if (currentEvent.ImpactYesMood > 0) { up3 = "▲"; } else if (currentEvent.ImpactYesMood < 0) { down3 = "▼"; }
+                if (currentEvent.ImpactYesTeacher > 0) { up4 = "▲"; } else if (currentEvent.ImpactYesTeacher < 0) { down4 = "▼"; }
             }
             else if(!yes)
             {
                 if (currentEvent.ImpactNoMoney > 0) { up1 = "▲"; } else if (currentEvent.ImpactNoMoney < 0) { down1 = "▼"; }
                 if (currentEvent.ImpactNoStudents > 10) { up2 = "▲"; } else if (currentEvent.ImpactNoStudents < 0) { down2 = "▼"; }
                 if (currentEvent.ImpactNoMood > 0) { up3 = "▲"; } else if (currentEvent.ImpactNoMood < 0) { down3 = "▼"; }
+                if (currentEvent.ImpactNoTeacher > 0) { up4 = "▲"; } else if (currentEvent.ImpactNoTeacher < 0) { down4 = "▼"; }
             }
             TraitementConsole.ChangeCouleur(ConsoleColor.Black, ConsoleColor.Green, false);
-            Console.WriteLine("                                                                          {0}           {1}          {2}", up1, up2, up3);
+            Console.WriteLine("                                                            {0}                   {1}                  {2}                 {3}", up1, up2, up3, up4);
             Console.ResetColor();
             Console.WriteLine("");
             TraitementConsole.ChangeCouleur(ConsoleColor.Black, ConsoleColor.Red, false);
-            Console.WriteLine("                                                                          {0}           {1}          {2}", down1, down2, down3);
+            Console.WriteLine("                                                            {0}                   {1}                  {2}                 {3}", down1, down2, down3, down4);
             Console.ResetColor();
         }
 
@@ -57,12 +91,11 @@ namespace GameJam2
         {
             Console.Clear();
             TraitementConsole.ChangeCouleur(ConsoleColor.DarkBlue, ConsoleColor.White, false);
-            // FIX ISSUE WHERE IF WEEK >= 10 WILL GO TO LINE BELOW
-            Console.WriteLine("                                                                                Week: {0}                                                                                ", week);
+            Console.WriteLine("                                                                            Semaine: {0}/48                                                                            ", week);
             Console.ResetColor();
             Console.WriteLine("");
-            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (currentEvent.Text.Length / 2)) + "}", currentEvent.Text));
             Console.WriteLine("");
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (currentEvent.Text.Length / 2)) + "}", currentEvent.Text));
             Console.WriteLine("");
             Console.WriteLine("");
             //Art contien yes no et le dessin au millieu
@@ -70,7 +103,7 @@ namespace GameJam2
 
             //Ca c'est les stats 
             TraitementConsole.ChangeCouleur(ConsoleColor.Black, ConsoleColor.White, false);
-            Console.WriteLine("                                                                  Argent: {0}  Eleves: {1}  Moral: {2}", money, students, mood);
+            Console.WriteLine("                                                  Finances: {0}  Bonheur élèves: {1}  Santé mentale: {2}  Bonheur prof: {3}", money, students, mood, teacher);
         }
 
         //Appliquer les cartes/events
@@ -83,19 +116,23 @@ namespace GameJam2
                 money += currentEvent.ImpactYesMoney;
                 students += currentEvent.ImpactYesStudents;
                 mood += currentEvent.ImpactYesMood;
+                teacher += currentEvent.ImpactYesTeacher;
             }
             else
             {
                 money += currentEvent.ImpactNoMoney;
                 students += currentEvent.ImpactNoStudents;
                 mood += currentEvent.ImpactNoMood;
+                teacher += currentEvent.ImpactNoTeacher;
             }
+            if(money >= 100 | students >= 100 | mood >= 100 | teacher >= 100) {gameover = true;}
+            if(money <= 0 | students <= 0 | mood <= 0 | teacher <= 0) {gameover = true;}
         }
 
 		public static void Main (string[] args)
 		{
-            //Change title make cursor invis
-            Console.Title = "Le jeu video";
+            //Change title & make cursor invisible
+            Console.Title = "Ze Campus";
             Console.CursorVisible = false;
 
             Events currentEvent;
@@ -119,7 +156,7 @@ namespace GameJam2
             while (true)
             {
                 if (!(NativeMethods.ReadConsoleInput(handle, ref record, 1, ref recordLen))) { throw new Win32Exception(); }
-                Console.SetCursorPosition(0, 20);
+                Console.SetCursorPosition(0, 19);
                 // DEBUG TO SHOW MOUSE POS AND MOUSE STATE
                 /*switch (record.EventType) {
                     case NativeMethods.MOUSE_EVENT: {
@@ -166,8 +203,10 @@ namespace GameJam2
                         DisplayGame(currentEvent);
                     }
                 }
-                if (record.KeyEvent.wVirtualKeyCode == (int)ConsoleKey.Escape) { return; }
+                if (record.KeyEvent.wVirtualKeyCode == (int)ConsoleKey.Escape | gameover) { break; }
             }
+            GameOver();
+            Console.ReadLine();
 		}
 	}
 

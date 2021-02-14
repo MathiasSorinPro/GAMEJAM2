@@ -42,6 +42,10 @@ namespace GameJam2
         {
             get { return eventImpacts[0].ImpactData[2]; }
         }
+        public int ImpactYesTeacher
+        {
+            get { return eventImpacts[0].ImpactData[3]; }
+        }
         //No impact
         public int ImpactNoMoney
         {
@@ -54,6 +58,10 @@ namespace GameJam2
         public int ImpactNoMood
         {
             get { return eventImpacts[1].ImpactData[2]; }
+        }
+        public int ImpactNoTeacher
+        {
+            get { return eventImpacts[1].ImpactData[3]; }
         }
     }
 }
