@@ -25,23 +25,33 @@ namespace GameJam2
             Console.Clear();
 
             //check wich text to display
-            if(money == 0) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover0.txt"));}
-            else if(money == 100) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover1.txt"));}
-            else if(students == 0) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover2.txt"));}
-            else if(students == 100) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover3.txt"));}
-            else if(mood == 0) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover4.txt"));}
-            else if(mood == 100) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover5.txt"));}
-            else if(teacher == 0) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover6.txt"));}
-            else if(teacher == 100) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover7.txt"));}
+            if(money <= 0) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover0.txt"));}
+            else if(money >= 100) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover1.txt"));}
+            else if(students <= 0) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover2.txt"));}
+            else if(students >= 100) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover3.txt"));}
+            else if(mood <= 0) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover4.txt"));}
+            else if(mood >= 100) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover5.txt"));}
+            else if(teacher <= 0) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover6.txt"));}
+            else if(teacher >= 100) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover7.txt"));}
 
+            gameovertext = String.Concat(TraitementConsole.LireFichier("gameover0.txt"));
             TraitementConsole.ChangeCouleur(ConsoleColor.DarkBlue, ConsoleColor.White, false);
             Console.WriteLine("                                                                            Semaine: {0}/48                                                                            ", week-1);
             Console.ResetColor();
-            Console.WriteLine("                                                                            Game Over");
+            Console.WriteLine("");
+            TraitementConsole.ChangeCouleur(ConsoleColor.White, ConsoleColor.DarkRed, false);
+            Console.WriteLine("                                                                               Game Over                                                                              ");
+            Console.ResetColor();
+            Console.WriteLine("");
+            Console.WriteLine("");
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (gameovertext.Length / 2)) + "}", gameovertext));
+            Console.WriteLine("");
+            Console.WriteLine("                                                                                  Fin                                                                              ");
             //Art contien yes no et le dessin au millieu
             //TraitementConsole.AfficheAsciiArtFile(currentEvent.Art);
             //Ca c'est les stats 
+            Console.WriteLine("");
+            Console.WriteLine("");
             TraitementConsole.ChangeCouleur(ConsoleColor.Black, ConsoleColor.White, false);
             Console.WriteLine("                                                  Finances: {0}  Bonheur élèves: {1}  Santé mentale: {2}  Bonheur prof: {3}", money, students, mood, teacher);
         }
@@ -66,14 +76,14 @@ namespace GameJam2
             if(yes)
             {
                 if (currentEvent.ImpactYesMoney > 0) { up1 = "▲"; } else if (currentEvent.ImpactYesMoney < 0) { down1 = "▼"; }
-                if (currentEvent.ImpactYesStudents > 10) { up2 = "▲"; } else if (currentEvent.ImpactYesStudents < 0) { down2 = "▼"; }
+                if (currentEvent.ImpactYesStudents > 0) { up2 = "▲"; } else if (currentEvent.ImpactYesStudents < 0) { down2 = "▼"; }
                 if (currentEvent.ImpactYesMood > 0) { up3 = "▲"; } else if (currentEvent.ImpactYesMood < 0) { down3 = "▼"; }
                 if (currentEvent.ImpactYesTeacher > 0) { up4 = "▲"; } else if (currentEvent.ImpactYesTeacher < 0) { down4 = "▼"; }
             }
             else if(!yes)
             {
                 if (currentEvent.ImpactNoMoney > 0) { up1 = "▲"; } else if (currentEvent.ImpactNoMoney < 0) { down1 = "▼"; }
-                if (currentEvent.ImpactNoStudents > 10) { up2 = "▲"; } else if (currentEvent.ImpactNoStudents < 0) { down2 = "▼"; }
+                if (currentEvent.ImpactNoStudents > 0) { up2 = "▲"; } else if (currentEvent.ImpactNoStudents < 0) { down2 = "▼"; }
                 if (currentEvent.ImpactNoMood > 0) { up3 = "▲"; } else if (currentEvent.ImpactNoMood < 0) { down3 = "▼"; }
                 if (currentEvent.ImpactNoTeacher > 0) { up4 = "▲"; } else if (currentEvent.ImpactNoTeacher < 0) { down4 = "▼"; }
             }
