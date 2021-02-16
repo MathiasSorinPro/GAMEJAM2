@@ -144,6 +144,7 @@ namespace GameJam2
             //Change title & make cursor invisible
             Console.Title = "Ze Campus";
             Console.CursorVisible = false;
+            TraitementConsole.ChangerGrosseurConsole(167, 24);
 
             Events currentEvent;
 
