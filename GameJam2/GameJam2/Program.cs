@@ -34,7 +34,6 @@ namespace GameJam2
             else if(teacher <= 0) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover6.txt"));}
             else if(teacher >= 100) {gameovertext = String.Concat(TraitementConsole.LireFichier("gameover7.txt"));}
 
-            gameovertext = String.Concat(TraitementConsole.LireFichier("gameover0.txt"));
             TraitementConsole.ChangeCouleur(ConsoleColor.DarkBlue, ConsoleColor.White, false);
             Console.WriteLine("                                                                            Semaine: {0}/48                                                                            ", week-1);
             Console.ResetColor();
